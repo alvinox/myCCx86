@@ -1,0 +1,11 @@
+INFRA_HFILES = common.h \
+               compiler.h \
+               error.h \
+               lexer.h \
+
+INFRA_CFILES = \
+
+INFRA_CPPFILES = common.cpp \
+                 compiler.cpp \
+                 error.cpp \
+                 lexer.cpp \
