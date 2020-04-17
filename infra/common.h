@@ -6,6 +6,10 @@
 #include <list>
 #include <string>
 
+#define ui1 unsigned char
+#define ui2 unsigned short
+#define ui4 unsigned int
+
 /*
     词法记号标签
 */

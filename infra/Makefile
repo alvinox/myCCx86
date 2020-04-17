@@ -11,7 +11,7 @@ OBJ_OWNS_PLUSPLUS = $(patsubst %.o, %$(OBJ_TYPE).o, $(OBJS_PLUSPLUS))
 
 INC = -I./ \
 
-CFLAGS += $(INC)
+CXXFLAGS += $(INC)
 
 .PHONY: all
 all: $(OBJDIR) $(OBJ_OWNS) $(OBJ_OWNS_PLUSPLUS)
@@ -20,10 +20,10 @@ $(OBJDIR):
 	@if [ ! -d "$(OBJDIR)" ]; then echo "mkdir -p $(OBJDIR)"; mkdir -p "$(OBJDIR)"; fi
 
 $(OBJ_OWNS):$(OBJDIR)/%$(OBJ_TYPE).o:./%.c $(DEPS)
-	$(CC) -c $(OPTIONS) $(CFLAGS) $< -o $(@)
+	$(CC) -c $(OPTIONS) $(CXXFLAGS) $< -o $(@)
 
 $(OBJ_OWNS_PLUSPLUS):$(OBJDIR)/%$(OBJ_TYPE).o:./%.cpp $(DEPS)
-	$(CC) -c $(OPTIONS) $(CFLAGS) $< -o $(@)
+	$(CC) -c $(OPTIONS) $(CXXFLAGS) $< -o $(@)
 
 .PHONY: clean
 clean:

@@ -25,6 +25,6 @@ class Error {
 #define PDEBUG(fmt, args...) printf(fmt, ##args)
 #else
 #define PDEBUG(fmt, args...)
-#endif	//DEBUG
+#endif //DEBUG
 
 #endif // _ERROR_H_
