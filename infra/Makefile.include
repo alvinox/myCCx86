@@ -1,11 +1,15 @@
 INFRA_HFILES = common.h \
                compiler.h \
                error.h \
+               token.h \
                lexer.h \
+               parser.h \
 
 INFRA_CFILES = \
 
 INFRA_CPPFILES = common.cpp \
                  compiler.cpp \
                  error.cpp \
+                 token.cpp \
                  lexer.cpp \
+                 parser.cpp \

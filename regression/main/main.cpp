@@ -27,8 +27,9 @@ int main(int argc,char *argv[])
         }
 
         char* opt = argv[argc - 1];
-        if (strcmp(opt, "-char") == 0)         Args::showChar = true;
-        else if (strcmp(opt, "-h") == 0)       Args::showHelp = true;
+        if (strcmp(opt, "-char") == 0)         Args::showChar   = true;
+        if (strcmp(opt, "-token") == 0)        Args::showToken  = true;
+        else if (strcmp(opt, "-h") == 0)       Args::showHelp   = true;
         else                                   srcfiles.push_back(opt);
     }
 

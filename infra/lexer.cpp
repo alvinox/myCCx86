@@ -2,6 +2,10 @@
 #include "compiler.h"
 #include "error.h"
 
+/*******************************************************************************
+                                   Scanner
+*******************************************************************************/
+
 std::string Scanner::showChar(char ch, ui4 row, ui4 col) {
     std::string str;
     char buf[64];
@@ -16,13 +20,6 @@ std::string Scanner::showChar(char ch, ui4 row, ui4 col) {
         default:     str += ch; break;
     }
     return str;
-
-    // if(ch==-1)        printf("EOF");
-    // else if(ch=='\n') printf("\\n");
-    // else if(ch=='\t') printf("\\t");
-    // else if(ch==' ')  printf("<blank>");
-    // else              printf("%c",ch);
-    // printf("\t\t<%d>\n", ch);
 }
 
 Scanner::Scanner(char* name) {
@@ -83,4 +80,73 @@ char Scanner::scan() {
     if (Args::showChar)
         printf("%s\n", showChar(ch, _rowNum, _colNum).c_str());
     return ch;
+}
+
+/*******************************************************************************
+                                   Lexer
+*******************************************************************************/
+
+bool Lexer::isLetter(char ch) {
+    return (('a' <= ch) && (ch <= 'z')) ||
+           (('A' <= ch) && (ch <= 'Z')) ||
+           (ch == '_');
+}
+
+bool Lexer::scan(char expected) {
+    _ch = _scanner.scan();
+    if (expected != 0) {
+        if (_ch != expected) {
+            return false;
+        }
+
+        _ch = _scanner.scan();
+        return true;
+    }
+
+    return true;
+}
+
+Token* Lexer::tokenize() {
+    while (_ch != -1) {
+        Token* t = NULL;
+        skipWhiteSpace();
+
+        if (Lexer::isLetter(_ch)) {
+            std::string name = readIdentifier();
+            Tag tag = Keywords::getKeywordTag(name);
+            if (tag == IDENTIFER) {
+                t = new Id(name);
+            } else {
+                t = new Token(tag);
+            }
+        }
+
+        if (_token != NULL) {
+            delete _token;
+        }
+        _token = t;
+        return _token;
+    }
+
+    if (_token != NULL) {
+        delete _token;
+    }
+    _token = new Token(END);
+    return _token;
+}
+
+void Lexer::skipWhiteSpace() {
+    while (_ch == ' ' || _ch == '\n' || _ch == '\t' || _ch == '\r') {
+        scan();
+    }
+}
+
+std::string Lexer::readIdentifier() {
+    std::string name;
+    do {
+        name += _ch;
+        scan();
+    } while (Lexer::isLetter(_ch));
+
+    return name;
 }

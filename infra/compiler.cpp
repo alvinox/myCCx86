@@ -1,5 +1,6 @@
 #include "compiler.h"
 #include "lexer.h"
+#include "parser.h"
 
 /*
 	编译参数初始化
@@ -15,4 +16,7 @@ bool Args::opt=false;
 
 void Compiler::compile(char* file) {
     Scanner scanner(file);
+    Lexer   lexer(scanner);
+    Parser  parser(lexer);
+    parser.program();
 }
