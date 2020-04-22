@@ -2,6 +2,7 @@ include ../Makefile.include
 
 MODULES = $(MAIN) \
           test_scanner \
+          test_lexer \
 
 all:
 	@for dir in $(MODULES); do make -C $$dir; done

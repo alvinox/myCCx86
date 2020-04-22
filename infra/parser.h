@@ -11,6 +11,8 @@ class Parser {
     void program();
     void move();
 
+    Token* getLook() const { return _look; }
+
   private:
     Lexer&   _lexer;
     Token*   _look;

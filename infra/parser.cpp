@@ -2,9 +2,9 @@
 #include "compiler.h"
 
 void Parser::program() {
-    while (_look->tag() != END) {
+    do {
         move();
-    }
+    } while (_look->tag() != END);
 }
 void Parser::move() {
     _look = _lexer.tokenize();

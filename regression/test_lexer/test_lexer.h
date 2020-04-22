@@ -1,5 +1,5 @@
-#ifndef __TEST_SCANNER_H_
-#define __TEST_SCANNER_H_
+#ifndef __TEST_LEXER_H_
+#define __TEST_LEXER_H_
 
 #include <iostream>
 #include <cstring>
@@ -7,26 +7,26 @@
 
 #include "common.h"
 #include "compiler.h"
+#include "token.h"
 #include "lexer.h"
+#include "parser.h"
 #include "error.h"
 
-class TestScanner {
+class TestLexer {
   public:
     struct ExpectStruct {
-        ui4  row;
-        ui4  col;
-        char ch;
+        Token* token;
     };
 
     static bool Entry();
 
   public:
-    TestScanner(char* file_name, std::vector<ExpectStruct>& expected) 
+    TestLexer(char* file_name, std::vector<ExpectStruct>& expected) 
         : _name(file_name), _expected(expected) { }
 
-  private:
+  public:
     char* _name;
     std::vector<ExpectStruct> _expected;
 };
 
-#endif // __TEST_SCANNER_H_
+#endif // __TEST_LEXER_H_

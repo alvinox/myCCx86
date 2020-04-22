@@ -372,27 +372,25 @@ std::vector<TestScanner::ExpectStruct> case2_expected = {
     {30, 1, -1},
 };
 
-void TestScanner::Entry() {
+bool TestScanner::Entry() {
     std::vector<TestScanner> tests = {
         {case1, case1_expected},
         {case2, case2_expected},
     };
 
     for (const TestScanner& test : tests) {
-        auto result = test.run();
-        
-        size_t result_cnt = result.size();
-        size_t expected_cnt = test._expected.size();
-        if (result_cnt != expected_cnt) {
-            PDEBUG(FATAL "testcase '%s' expect %zu chars, but got %zu!\n", test._name, expected_cnt, result_cnt);
-            Error::errorNum++;
-            continue;
-        }
 
-        size_t cnt = std::min(result_cnt, expected_cnt);
-        for (size_t i = 0; i < cnt; ++i) {
-            const TestScanner::ExpectStruct& r = result[i];
-            const TestScanner::ExpectStruct& e = test._expected[i];
+        Scanner scanner(test._name);
+
+        size_t ref_cnt = test._expected.size();
+        for (size_t i = 0; i < ref_cnt; i++) {
+            scanner.scan();
+            ui4 row = scanner.getRow();
+            ui4 col = scanner.getCol();
+            char ch = scanner.getLastChar();
+
+            const ExpectStruct r  = {row, col, ch};
+            const ExpectStruct& e = test._expected[i];
 
             if (r.row != e.row ||
                 r.col != e.col ||
@@ -402,9 +400,11 @@ void TestScanner::Entry() {
                 PDEBUG(INFO "  but got: %s\n", Scanner::showChar(r.ch, r.row, r.col).c_str());
                 Error::errorNum++;
             }
+
         }
     }
     int error = Error::errorNum;
     int warn  = Error::warnNum;
-    std::cout<<"Finish Compile: Error="<<error<<", Warn="<<warn<<"."<<std::endl;
+    std::cout<<"Finish Test Scanner: Error="<<error<<", Warn="<<warn<<"."<<std::endl;
+    return error == 0 && warn == 0;
 }

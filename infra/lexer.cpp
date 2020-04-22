@@ -115,7 +115,7 @@ Token* Lexer::tokenize() {
             std::string name = readIdentifier();
             Tag tag = Keywords::getKeywordTag(name);
             if (tag == IDENTIFER) {
-                t = new Id(name);
+                t = new TokenId(name);
             } else {
                 t = new Token(tag);
             }
@@ -125,7 +125,11 @@ Token* Lexer::tokenize() {
             delete _token;
         }
         _token = t;
-        return _token;
+
+        if (_token != NULL)
+            return _token;
+        else
+            continue;
     }
 
     if (_token != NULL) {
