@@ -37,8 +37,6 @@ class Scanner {
 
 class Lexer {
   public:
-    static bool isLetter(char ch);
-  public:
     Lexer(Scanner& scanner) : _scanner(scanner), _token(NULL), _ch(' ') { }
     ~Lexer() { if (_token != NULL) delete _token; }
 
@@ -47,7 +45,11 @@ class Lexer {
     Token* tokenize();
 
     void skipWhiteSpace();
+    void skipLine();
     std::string readIdentifier();
+    std::string readString(bool& is_ok);
+    char        readChar(bool& is_ok);
+    int         readNumber(bool& is_ok);
 
   private:
     Scanner& _scanner;

@@ -378,6 +378,7 @@ bool TestScanner::Entry() {
         {case2, case2_expected},
     };
 
+    int error_cnt = 0;
     for (const TestScanner& test : tests) {
 
         Scanner scanner(test._name);
@@ -398,13 +399,13 @@ bool TestScanner::Entry() {
                 PDEBUG(FATAL "testcase '%s' at %zuth char: \n", test._name, i);
                 PDEBUG(INFO "  expect:  %s\n", Scanner::showChar(e.ch, e.row, e.col).c_str());
                 PDEBUG(INFO "  but got: %s\n", Scanner::showChar(r.ch, r.row, r.col).c_str());
-                Error::errorNum++;
+                error_cnt++;
             }
 
         }
     }
-    int error = Error::errorNum;
-    int warn  = Error::warnNum;
-    std::cout<<"Finish Test Scanner: Error="<<error<<", Warn="<<warn<<"."<<std::endl;
-    return error == 0 && warn == 0;
+
+    std::cout << "---------------------------------------------------" << std::endl;
+    std::cout << "Finish Test Scanner: Error="<< error_cnt << std::endl;
+    return error_cnt == 0;
 }

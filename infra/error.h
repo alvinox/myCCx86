@@ -10,15 +10,16 @@
 
 class Error {
   public:
+    static Scanner* scanner;
+
     static int errorNum;
     static int warnNum;
 
-    // static void lexError(int code);
+    static std::unordered_map<int, std::string> LexerErrorTable;
+
+    static void lexError(int code, std::string hint = "");
   public:
     Error(Scanner* scanner);
-
-  private:
-    Scanner* _scanner;
 };
 
 #ifdef DEBUG
@@ -26,5 +27,7 @@ class Error {
 #else
 #define PDEBUG(fmt, args...)
 #endif //DEBUG
+
+#define LEXERROR(code, args...) Error::lexError(code, ##args)
 
 #endif // _ERROR_H_

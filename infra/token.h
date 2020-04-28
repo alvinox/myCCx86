@@ -9,9 +9,22 @@
 
 enum Tag {
     ERR,
+    COMMENT,
     END,
-    KW_INT, KW_CHAR, KW_VOID,
+    KW_INT, KW_CHAR, KW_VOID, KW_EXTERN,
+    KW_IF, KW_ELSE,
+    KW_SWITCH, KW_CASE, KW_DEFAULT,
+    KW_WHILE, KW_DO, KW_FOR,
+    KW_BREAK, KW_CONTINUE, KW_RETURN,
     IDENTIFER, NUMBER, CHAR, STRING,
+    ADD, SUB, MUL, DIV, MOD,
+    INC, DEC,
+    GT, GE, LT, LE, EQU, NEQU,
+    AND, OR, BANG, LEA, ASSIGN,
+    LPAREN, RPAREN,
+    LBRACK, RBRACK,
+    LBRACE, RBRACE,
+    COMMA, COLON, SEMICON,
 };
 
 extern std::unordered_map<int, std::string> tokenName;

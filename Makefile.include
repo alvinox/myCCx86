@@ -4,8 +4,8 @@ DEBUG := 1
 export RELEASE
 export DEBUG
 
-#CC = clang++
-CC = g++
+CC = clang++
+#CC = g++
 
 AR = ar
 ARFLAGS = rcs
