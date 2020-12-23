@@ -8,9 +8,9 @@ CXXFLAGS += $(INC)
 CFILES = \
 
 CPLUSPLUSFULES = main.cpp \
-                 test_scanner.cpp \
+                 test_parser.cpp \
 
-HFILES = test_scanner.h \
+HFILES = test_parser.h \
 
 DEPS = $(HFILES) Makefile ../../Makefile.include
 

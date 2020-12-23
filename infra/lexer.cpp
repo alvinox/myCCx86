@@ -350,7 +350,7 @@ int Lexer::readNumber(bool& is_ok) {
             val = val * 10 + Util::tansDecimalCharToInt(_ch);
             scan();
         } while (Util::isDecimalDigit(_ch));
-        if (Util::isLetter(_ch) || Util::isDecimalDigit(_ch)) {
+        if (Util::isLetter(_ch)) {
             LEXERROR(UNQUALIFIED_ID);
             is_ok = false;
             do {

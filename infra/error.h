@@ -10,14 +10,23 @@
 
 class Error {
   public:
+    enum ErrorType {
+      e_lexer_error,
+      e_syntactical_error,
+      e_semantic_error,
+    };
     static Scanner* scanner;
 
     static int errorNum;
     static int warnNum;
 
     static std::unordered_map<int, std::string> LexerErrorTable;
+    static std::unordered_map<int, std::string> SemanticErrorTable;
 
-    static void lexError(int code, std::string hint = "");
+    static void baseError(int error_type, int code, const std::string& hint = "");
+    // static void baseError(int code, const std::string& hint = "");
+    static void lexError (int code, const std::string& hint = "");
+    static void semError (int code, const std::string& hint = "");
   public:
     Error(Scanner* scanner);
 };
@@ -29,5 +38,6 @@ class Error {
 #endif //DEBUG
 
 #define LEXERROR(code, args...) Error::lexError(code, ##args)
+#define SEMERROR(code, args...) Error::semError(code, ##args)
 
 #endif // _ERROR_H_

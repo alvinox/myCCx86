@@ -1,5 +1,5 @@
-#ifndef __TEST_LEXER_H_
-#define __TEST_LEXER_H_
+#ifndef __TEST_PARSER_H_
+#define __TEST_PARSER_H_
 
 #include <iostream>
 #include <cstring>
@@ -12,16 +12,15 @@
 #include "parser.h"
 #include "error.h"
 
-class TestLexer {
+class TestParser {
   public:
     struct ExpectStruct {
-        Token* token;
     };
 
-    static bool Entry();
+    static bool TestFunc();
 
   public:
-    TestLexer(char* file_name, std::vector<ExpectStruct>& expected) 
+    TestParser(char* file_name, std::vector<ExpectStruct>& expected) 
         : _name(file_name), _expected(expected) { }
 
   public:
@@ -29,4 +28,4 @@ class TestLexer {
     std::vector<ExpectStruct> _expected;
 };
 
-#endif // __TEST_LEXER_H_
+#endif // __TEST_PARSER_H_

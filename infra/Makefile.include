@@ -5,6 +5,7 @@ INFRA_HFILES = common.h \
                token.h \
                lexer.h \
                parser.h \
+               symbol.h \
 
 INFRA_CFILES = \
 
@@ -15,3 +16,4 @@ INFRA_CPPFILES = common.cpp \
                  token.cpp \
                  lexer.cpp \
                  parser.cpp \
+                 symbol.cpp \
